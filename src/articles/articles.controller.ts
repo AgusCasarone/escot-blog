@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -41,6 +41,13 @@ export class ArticlesController {
         return await this.articleService.findById(id);
     }
     
+    @Delete(':id')
+    async deleteById(
+        @Param('id') 
+        id: string
+    ): Promise<Article> {
+        return await this.articleService.deleteById(id);
+    }
 
 
 }
