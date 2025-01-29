@@ -18,6 +18,10 @@ export class ArticlesService {
 
     async findAll(query: Query): Promise<Article[]> {
 
+        const resPerPage = Number(query.limit) || 10;
+        const currentPage = Number(query.page) || 1;
+        const skip = resPerPage * (currentPage - 1);
+
         const search = query.search ? {
             title: {
                 $regex: query.search,
@@ -25,7 +29,9 @@ export class ArticlesService {
             }
         } : {}
 
-        const articles = await this.articleModel.find({ ...search });
+        const articles = await this.articleModel.find({ ...search })
+            .limit(resPerPage)
+            .skip(skip);
 
         return articles;
     }
