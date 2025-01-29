@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Article } from './schemas/article.schema';
 import * as mongoose from 'mongoose';
 import { Query } from 'express-serve-static-core';
-import { title } from 'process';
 
 @Injectable()
 export class ArticlesService {
@@ -19,14 +18,14 @@ export class ArticlesService {
 
     async findAll(query: Query): Promise<Article[]> {
 
-        const keyword = query.keyword ? {
+        const search = query.search ? {
             title: {
-                $regex: query.keyword,
+                $regex: query.search,
                 $options: 'i'
             }
         } : {}
 
-        const articles = await this.articleModel.find({ ...keyword });
+        const articles = await this.articleModel.find({ ...search });
 
         return articles;
     }
