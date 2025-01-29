@@ -3,6 +3,8 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose';
 import { Article } from './schemas/article.schema';
 import * as mongoose from 'mongoose';
+import { Query } from 'express-serve-static-core';
+import { title } from 'process';
 
 @Injectable()
 export class ArticlesService {
@@ -15,8 +17,17 @@ export class ArticlesService {
         return mongoose.Types.ObjectId.isValid(id);
     }
 
-    async findAll(): Promise<Article[]> {
-        const articles = await this.articleModel.find();
+    async findAll(query: Query): Promise<Article[]> {
+
+        const keyword = query.keyword ? {
+            title: {
+                $regex: query.keyword,
+                $options: 'i'
+            }
+        } : {}
+
+        const articles = await this.articleModel.find({ ...keyword });
+
         return articles;
     }
 
