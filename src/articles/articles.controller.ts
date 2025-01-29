@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Types } from 'mongoose';
+import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
@@ -20,6 +21,16 @@ export class ArticlesController {
         article: CreateArticleDto,
     ): Promise<Article> {
         return this.articleService.create(article);
+    }
+
+    @Put(':id')
+    async updateArticle(
+        @Param('id') 
+        id: string,
+        @Body()
+        article: UpdateArticleDto,
+    ): Promise<Article> {
+        return this.articleService.updateById(id, article);
     }
 
     @Get(':id')
