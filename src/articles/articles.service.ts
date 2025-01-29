@@ -55,4 +55,18 @@ export class ArticlesService {
 
         return res;
     }
+
+    async deleteById(id: string): Promise<Article> {
+        if (!this.isValidObjectId(id)) {
+            throw new BadRequestException(`El ID ${id} no tiene un formato válido.`);
+        }
+
+        const res = await this.articleModel.findByIdAndDelete(id);
+
+        if (!res) {
+            throw new NotFoundException(`Artículo con ID ${id} no encontrado`);
+        }
+
+        return res;
+    }
 }
