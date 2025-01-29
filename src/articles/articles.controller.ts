@@ -6,12 +6,14 @@ import { Body,
     Param, 
     Post, 
     Put, 
-    Query } from '@nestjs/common';
+    Query, 
+    UseGuards} from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('articles')
 export class ArticlesController {
@@ -23,6 +25,7 @@ export class ArticlesController {
     }
 
     @Post('create')
+    @UseGuards(AuthGuard())
     async createArticle(
         @Body()
         article: CreateArticleDto,
@@ -31,6 +34,7 @@ export class ArticlesController {
     }
 
     @Put(':id')
+    @UseGuards(AuthGuard())
     async updateArticle(
         @Param('id') 
         id: string,
@@ -49,6 +53,7 @@ export class ArticlesController {
     }
     
     @Delete(':id')
+    @UseGuards(AuthGuard())
     async deleteById(
         @Param('id') 
         id: string
