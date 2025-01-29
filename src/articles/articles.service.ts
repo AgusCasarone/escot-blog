@@ -17,19 +17,36 @@ export class ArticlesService {
     }
 
     async findAll(query: Query): Promise<Article[]> {
-
         const resPerPage = Number(query.limit) || 10;
-        const currentPage = Number(query.page) || 1;
-        const skip = resPerPage * (currentPage - 1);
+        const currentPage = Number(query.page) || 1; 
+        const skip = resPerPage * (currentPage - 1); 
 
-        const search = query.search ? {
-            title: {
+        const filter: any = {};
+
+        if (query.search) {
+            filter.title = {
                 $regex: query.search,
-                $options: 'i'
-            }
-        } : {}
+                $options: 'i', 
+            };
+        }
 
-        const articles = await this.articleModel.find({ ...search })
+        if (query.author) {
+            filter.author = {
+                $regex: query.author,
+                $options: 'i',
+            };
+        }
+
+        const sortOption: any = {};
+        if (query.sort === 'asc') {
+            sortOption.createdAt = 1;
+        } else if (query.sort === 'desc') {
+            sortOption.createdAt = -1;
+        }
+
+        const articles = await this.articleModel
+            .find(filter)
+            .sort(sortOption)
             .limit(resPerPage)
             .skip(skip);
 
