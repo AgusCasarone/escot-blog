@@ -1,18 +1,25 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, 
+    Controller, 
+    Delete, 
+    Get, 
+    Param, 
+    Post, 
+    Put, 
+    Query } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
-import { Types } from 'mongoose';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { Query as ExpressQuery } from 'express-serve-static-core';
 
 @Controller('articles')
 export class ArticlesController {
     constructor(private articleService: ArticlesService) {}
 
-    @Get('getAll')
-    async getAllArticles(): Promise<Article[]> {
-        return this.articleService.findAll();
+    @Get()
+    async getAllArticles(@Query() query: ExpressQuery ): Promise<Article[]> {
+        return this.articleService.findAll(query);
     }
 
     @Post('create')

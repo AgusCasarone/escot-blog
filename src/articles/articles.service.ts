@@ -3,6 +3,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose';
 import { Article } from './schemas/article.schema';
 import * as mongoose from 'mongoose';
+import { Query } from 'express-serve-static-core';
 
 @Injectable()
 export class ArticlesService {
@@ -15,8 +16,40 @@ export class ArticlesService {
         return mongoose.Types.ObjectId.isValid(id);
     }
 
-    async findAll(): Promise<Article[]> {
-        const articles = await this.articleModel.find();
+    async findAll(query: Query): Promise<Article[]> {
+        const resPerPage = Number(query.limit) || 10;
+        const currentPage = Number(query.page) || 1; 
+        const skip = resPerPage * (currentPage - 1); 
+
+        const filter: any = {};
+
+        if (query.search) {
+            filter.title = {
+                $regex: query.search,
+                $options: 'i', 
+            };
+        }
+
+        if (query.author) {
+            filter.author = {
+                $regex: query.author,
+                $options: 'i',
+            };
+        }
+
+        const sortOption: any = {};
+        if (query.sort === 'asc') {
+            sortOption.createdAt = 1;
+        } else if (query.sort === 'desc') {
+            sortOption.createdAt = -1;
+        }
+
+        const articles = await this.articleModel
+            .find(filter)
+            .sort(sortOption)
+            .limit(resPerPage)
+            .skip(skip);
+
         return articles;
     }
 
