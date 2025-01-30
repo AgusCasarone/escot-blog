@@ -34,7 +34,7 @@ El desarrollo de este proyecto inició el 28/01/2025 a las 18hs.
 
 Durante el desarrollo tuve un bloqueo de aproximadamente 3 o 4 horas debido a la falta de una cuenta en AWS para poder crear el bucket s3. Lo solucioné cuando una amiga mía me prestó su cuenta.
 
-Por el mismo motivo, tuve un bloqueo de una hora en el que estuve buscando alguna manera de poder subir la build a Azure, ya que no tengo cuenta y la activación de una cuenta nueva no está funcionando correctamente (la rechaza por cuestiones de validación de identidad con la tarjeta de crédito). Mientras espero que la gente a la que le pregunté si puede prestarme una cuenta, hice una build a Netlify que es un servicio muy similar, pero gratuito y en el que ya tengo una cuenta activa.
+Por el mismo motivo, tuve un bloqueo de una hora en el que estuve buscando alguna manera de poder subir la build a Azure, ya que no tengo cuenta y la activación de una cuenta nueva no está funcionando correctamente (la rechaza por cuestiones de validación de identidad con la tarjeta de crédito). Mientras espero que la gente a la que le pregunté si puede prestarme una cuenta, hice una build a [Netlify](https://escot-blog.netlify.app/articles/)  y otra de respaldo a [Railway](https://escot-blog-production.up.railway.app/) que son servicios similares, con pipelines de CI/CD automáticos, pero con un servicio gratuito. La desventaja de estos, es que los deploys son muy inestables y suelen caerse. Al testearlo, por favor avisarme para que pueda validar que esté corriendo adecuadamente.
 
 ## Fuentes de información oficial
 
