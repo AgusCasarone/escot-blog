@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable prettier/prettier */
-import { Controller, FileTypeValidator, MaxFileSizeValidator, ParseFilePipe, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, FileTypeValidator, MaxFileSizeValidator, ParseFilePipe, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('upload')
 export class UploadController {
@@ -13,6 +14,7 @@ export class UploadController {
     ){}
 
     @Post()
+    @UseGuards(AuthGuard())
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(@UploadedFile(
         new ParseFilePipe({
@@ -22,7 +24,8 @@ export class UploadController {
             ]
         })
     ) file: Express.Multer.File) {
-        return await this.uploadService.upload(file.originalname, file.buffer);
+            const imageUrl = await this.uploadService.upload(file.originalname, file.buffer);
+        return { imageUrl };
     }
 
 }
