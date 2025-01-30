@@ -4,75 +4,44 @@ API RESTful creada con NestJS para gestionar artículos de blog. Incluye CRUD co
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Desarrollo
 
-## Project setup
+Link al repositorio de GitHub: https://github.com/AgusCasarone/escot-blog
 
-```bash
-$ npm install
-```
+Escot Blog es una API RESTful creada con NestJS para gestionar artículos de blog. Incluye CRUD completo, autenticación JWT, subida de imágenes a AWS S3, almacenamiento de datos en MongoDB, filtros avanzados, documentación Swagger y despliegue automatizado en Azure App Service.
 
-## Compile and run the project
+El desarrollo de este proyecto inició el 28/01/2025 a las 18hs.
 
-```bash
-# development
-$ npm run start
+## Despliegue
 
-# watch mode
-$ npm run start:dev
+1. Clonar el repositorio
+2. Correr `npm intall`
+3. Instalar todas las librerías corriendo los siguientes scripts:
+    1. `npm install @nestjs/mongoose mongoose` para la base de datos MongoDb
+    2. `npm install @nestjs/config` para la configuración
+    3. `npm install @nestjs/swagger` para la documentación con Swagger
+    4. `npm install @nestjs/jwt` para la autenticación con JWT
+    5. `npm install --save @nestjs/passport passport passport-local` para las credenciales
+    6. `npm install --save-dev @types/passport-local` para la información necesaria de autenticación
+    7. `npm i bcryptjs --save` para la encriptación de la contraseña
+    8. `npm i passport-jwt --save` para el inicio de sesión
+    9. `npm install @aws-sdk/client-s3` para tener la conexión con AWS
+    10. `npm i -D @types/multer` para manejar las peticiones al servidor AWS
+4. La documentación completa de cada endpoint se encontrará con Swagger accediendo a `localhost:3000/api`
+5. Se debe crear una base de datos MongoDB cuyo string de conexión sea `mongodb://localhost:27017/escot-blog`
 
-# production mode
-$ npm run start:prod
-```
+## Notas
 
-## Run tests
+Durante el desarrollo tuve un bloqueo de aproximadamente 3 o 4 horas debido a la falta de una cuenta en AWS para poder crear el bucket s3. Lo solucioné cuando una amiga mía me prestó su cuenta.
 
-```bash
-# unit tests
-$ npm run test
+Por el mismo motivo, tuve un bloqueo de una hora en el que estuve buscando alguna manera de poder subir la build a Azure, ya que no tengo cuenta y la activación de una cuenta nueva no está funcionando correctamente (la rechaza por cuestiones de validación de identidad con la tarjeta de crédito). Mientras espero que la gente a la que le pregunté si puede prestarme una cuenta, hice una build a Netlify que es un servicio muy similar, pero gratuito y en el que ya tengo una cuenta activa.
 
-# e2e tests
-$ npm run test:e2e
+## Fuentes de información oficial
 
-# test coverage
-$ npm run test:cov
-```
+[Conección con la base de datos](https://docs.nestjs.com/techniques/mongodb)
 
-## Deployment
+[Documentación con Swagger](https://docs.nestjs.com/openapi/introduction)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+[Autenticación con JWT](https://docs.nestjs.com/security/authentication)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+[Conexión con AWS](https://docs.nestjs.com/faq/serverless)
