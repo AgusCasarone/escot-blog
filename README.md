@@ -36,6 +36,8 @@ Durante el desarrollo tuve un bloqueo de aproximadamente 3 o 4 horas debido a la
 
 Por el mismo motivo, tuve un bloqueo de una hora en el que estuve buscando alguna manera de poder subir la build a Azure, ya que no tengo cuenta y la activación de una cuenta nueva no está funcionando correctamente (la rechaza por cuestiones de validación de identidad con la tarjeta de crédito). Mientras espero que la gente a la que le pregunté si puede prestarme una cuenta, hice una build a [Netlify](https://escot-blog.netlify.app/articles/)  y otra de respaldo a [Railway](https://escot-blog-production.up.railway.app/) que son servicios similares, con pipelines de CI/CD automáticos, pero con un servicio gratuito. La desventaja de estos, es que los deploys son muy inestables y suelen caerse. Al testearlo, por favor avisarme para que pueda validar que esté corriendo adecuadamente.
 
+En este sitio de [Notion](https://agus-casarone.notion.site/Desaf-o-Escot-Blog-189aabca27a8807fbefcfc0e7cdf3144) detallé el proceso de desarrollo paso a paso y la planificación previa, con un estimado de tiempo previo que se puede contrastar con una tabla donde está volcado el tiempo de trabajo real que invertí en cada bloque.
+
 ## Fuentes de información oficial
 
 [Conección con la base de datos](https://docs.nestjs.com/techniques/mongodb)
