@@ -1,12 +1,14 @@
 # Escot-Blog
+
 API RESTful creada con NestJS para gestionar artículos de blog. Incluye CRUD completo, autenticación JWT, subida de imágenes a AWS S3, filtros avanzados, documentación Swagger y despliegue automatizado en Azure App Service.
 
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-# Desarrollo
 
-Link al repositorio de GitHub: https://github.com/AgusCasarone/escot-blog
+## Desarrollo
+
+Link al repositorio de GitHub: <https://github.com/AgusCasarone/escot-blog>
 
 Escot Blog es una API RESTful creada con NestJS para gestionar artículos de blog. Incluye CRUD completo, autenticación JWT, subida de imágenes a AWS S3, almacenamiento de datos en MongoDB, filtros avanzados, documentación Swagger y despliegue automatizado en Azure App Service.
 

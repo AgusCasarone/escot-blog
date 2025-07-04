@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -17,22 +16,16 @@ import { JwtStrategy } from './jwt.strategy';
       useFactory: (config: ConfigService) => {
         return {
           secret: config.get<string>('JWT_SECRET'),
-          signOptions: { 
-            expiresIn: config.get<string | number>('JWT_EXPIRES') 
+          signOptions: {
+            expiresIn: config.get<string | number>('JWT_EXPIRES'),
           },
-        }
-      }
+        };
+      },
     }),
-    MongooseModule.forFeature([{  name: 'User', schema: UserSchema }])
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService, 
-    JwtStrategy,
-  ],
-  exports: [
-    JwtStrategy,
-    PassportModule,
-  ]
+  providers: [AuthService, JwtStrategy],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

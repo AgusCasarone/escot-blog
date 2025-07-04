@@ -1,23 +1,20 @@
-/* eslint-disable prettier/prettier */
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({
-    timestamps: true,
+  timestamps: true,
 })
 export class Article {
+  @Prop()
+  title: string;
 
-    @Prop()
-    title: string;
+  @Prop()
+  content: string;
 
-    @Prop()
-    content: string;
+  @Prop()
+  author: string;
 
-    @Prop()
-    author: string;
-
-    @Prop()
-    image: string;
-
+  @Prop()
+  image: string;
 }
 
-export const ArticleSchema = SchemaFactory.createForClass(Article)
+export const ArticleSchema = SchemaFactory.createForClass(Article);
