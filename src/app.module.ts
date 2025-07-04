@@ -6,7 +6,6 @@ import { ArticlesController } from './articles/articles.controller';
 import { ArticlesModule } from './articles/articles.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -14,10 +13,19 @@ import { UploadModule } from './upload/upload.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/escot-blog'),
+    MongooseModule.forRoot(
+      (() => {
+        const uri = process.env.MONGO_DB_CONNECTION_STRING;
+        if (!uri) {
+          throw new Error(
+            'MONGO_DB_CONNECTION_STRING environment variable is not set',
+          );
+        }
+        return uri;
+      })(),
+    ),
     ArticlesModule,
     AuthModule,
-    UploadModule,
   ],
   controllers: [AppController, ArticlesController],
   providers: [AppService],
