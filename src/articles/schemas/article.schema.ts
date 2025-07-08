@@ -12,9 +12,6 @@ export class Article {
 
   @Prop()
   author: string;
-
-  @Prop()
-  image: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
