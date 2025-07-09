@@ -1,4 +1,4 @@
-import { IsEmpty, IsString, IsUrl } from 'class-validator';
+import { IsEmpty, IsString } from 'class-validator';
 
 export class CreateArticleDto {
   @IsEmpty()
@@ -12,8 +12,4 @@ export class CreateArticleDto {
   @IsEmpty()
   @IsString()
   readonly author: string;
-
-  @IsEmpty()
-  @IsUrl()
-  readonly image: string;
 }
