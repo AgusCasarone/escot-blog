@@ -13,15 +13,18 @@ import { ArticlesService } from './articles.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
-import { Query as ExpressQuery } from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
+import { ResponseDto } from 'src/common/dtos/response.dto';
+import { FilterArticleDto } from 'src/common/filters/filter-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
   constructor(private articleService: ArticlesService) {}
 
   @Get()
-  async getAllArticles(@Query() query: ExpressQuery): Promise<Article[]> {
+  async getAllArticles(
+    @Query() query: FilterArticleDto,
+  ): Promise<ResponseDto<Article[]>> {
     return this.articleService.findAll(query);
   }
 
